@@ -10,7 +10,7 @@ html{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .log{
     border-radius: 105px;
@@ -26,6 +26,10 @@ span{
 .spanyol{
     color: black;
     -webkit-text-stroke-color: #ffffff;
+}
+
+.spanish{
+    color: wheat;
 }
 
 .devel{
@@ -118,9 +122,8 @@ nav button#menuButton{
     padding: 7px;
 }
 
-.scamlist{
+.list{
     color: #FFF;
-    font-family: Abyssinica SIL;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -373,7 +376,7 @@ nav button#menuButton{
     background: #000000;
     font-size: 16px;
     font-weight: 400;
-    color: #FFF;
+    color: #D8E7CA;
     text-align: center;
     font-family: Abhaya Libre ExtraBold;
     font-size: 20px;
@@ -382,14 +385,9 @@ nav button#menuButton{
     line-height: normal;
   }
 
-  @media (min-width: 568px) {
-
-  }
-
-footer{
+  footer{
     background-color: #D8E7CA;
-    border-radius: 10px;
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -406,8 +404,6 @@ footer .top .social-links{
     align-items: center;
     gap: 10px;
     font-size: 22px;
-    border-radius: 105px;
-    border: 1px solid #000
 }
 
 footer .separator{
@@ -426,45 +422,7 @@ footer .bottom .links a{
     margin-left: 14px;
 }
 
-@media screen and (max-width: 1200px) {
-    
-    .main .left h5{
-        font-size: 18px;
-    }
-
-    .main .left h3{
-        font-size: 36px;
-    }
-
-    .main .left p{
-        font-size: 18px;
-    }
-
-    .main .right img{
-        width: 380px;
-    }
-
-    .about .left img{
-        width: 370px;
-    }
-
-    .about .right h3,
-    .portfolio .header h3,
-    .feedback h3{
-        font-size: 32px;
-    }
-
-    .about .right p{
-        font-size: 15px;
-    }
-
-    footer .top ul{
-        gap: 20px;
-    }
-
-}
-
-@media screen and (max-width: 992px) {
+  @media screen and (max-width: 992px) {
     
     nav button{
         display: none;
@@ -542,9 +500,18 @@ footer .bottom .links a{
         gap: 18px;
     }
 
+    footer{
+        padding: 85px 42px;
+    }
+
+    footer .bottom{
+        flex-direction: column-reverse;
+        gap: 14px;
+    }
+
 }
 
-@media screen and (max-width: 576px) {
+    @media screen and (max-width: 576px) {
     
     nav ul li a{
         font-size: 13px;
@@ -574,4 +541,5 @@ footer .bottom .links a{
     .portfolio .portfo-items .item{
         width: 80%;
     }
+
 }
