@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
@@ -52,10 +40,16 @@ async function getDataFromFirebase() {
 }
 
 
+document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    // Check if the pressed key is Enter (key code 13)
+    if (event.key === "Enter") {
+        // Call the search function
+        search();
+    }
+});
 
 async function search() {
     const searchInput = document.getElementById("searchInput").value.toLowerCase();
-    const words = searchInput.split(' ');
     const resultDiv = document.getElementById("result");
     resultDiv.innerHTML = ""; // Clear previous results
 
@@ -65,25 +59,48 @@ async function search() {
         const keywords = entry.keywords.map(keyword => keyword.toLowerCase());
 
         // Check if at least one word in the user input is present in at least one keyword for an entry
-        const atLeastOneWordPresent = words.some(word => {
+        const atLeastOneWordPresent = searchInput.split(' ').some(word => {
             return keywords.some(keyword => {
                 return keyword.includes(word);
             });
         });
-
+        
         console.log(`Entry: ${JSON.stringify(entry)}, At Least One Word Present: ${atLeastOneWordPresent}`);
 
         if (atLeastOneWordPresent) {
-            const linkElement = document.createElement("a");
-            linkElement.href = entry.link;
+            const entryContainer = document.createElement("div");
+            entryContainer.classList.add("entry-container");
+
+            // Add a click event listener to the entryContainer
+            entryContainer.addEventListener("click", () => {
+                window.location.href = entry.link;
+            });
+
+            const imageContainer = document.createElement("div");
+            imageContainer.classList.add("image-container");
 
             const image = document.createElement("img");
-            image.src = getImagePath(entry.keywords); // Assuming a function to get the image path
+            image.src = getImagePath(entry.name); // Assuming a function to get the image path
             image.alt = entry.keywords.join(", "); // Use all keywords as alt text
 
-            linkElement.appendChild(image);
-            resultDiv.appendChild(linkElement);
-            resultDiv.appendChild(document.createElement("br"));
+            imageContainer.appendChild(image);
+            entryContainer.appendChild(imageContainer);
+
+            const textContainer = document.createElement("div");
+            textContainer.classList.add("text-container");
+
+            const nameElement = document.createElement("h3");
+            nameElement.textContent = entry.name;
+
+            const descriptionElement = document.createElement("p");
+            descriptionElement.textContent = entry.description;
+
+            textContainer.appendChild(nameElement);
+            textContainer.appendChild(descriptionElement);
+
+            entryContainer.appendChild(textContainer);
+
+            resultDiv.appendChild(entryContainer);// Add a horizontal line between entries
         }
     }
 
@@ -95,10 +112,11 @@ async function search() {
 
 
 
+
 document.getElementById("searchButton").addEventListener("click", search);
 // Function to construct image path based on multiple keywords
-function getImagePath(keywords) {
+function getImagePath(name) {
   // Assuming images are stored in a folder named "img"
   // Constructing a simple image path using the first keyword
-  return `img/${keywords[0]}.png`;
+  return `img/${name}.png`;
 }
