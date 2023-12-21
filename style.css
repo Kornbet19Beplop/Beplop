@@ -360,6 +360,27 @@ nav button#menuButton{
   }
 
 
+ .list-container {
+    justify-content: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .list-item {
+    white-space: nowrap;
+    flex: 1;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin: 50px
+  }
+
+.list2{
+    margin: auto;
+}
+
   input,
   textarea {
     width: calc(100% - 18px);
